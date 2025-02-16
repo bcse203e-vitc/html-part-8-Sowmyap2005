@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h2>FORM VALIDATION</h2>
+    <form name="f1" onsubmit="return valfun()">
+        Name:<input id="name" name="name" type="text"><br><br>
+        E-mail:<input id="mail" name="mail" type="email"><br><br>
+        Password:<input id="password" name="password" type="password"><br><br>
+        <button type="submit">SUBMIT</button>
+    </form>
+
+    <script>
+        function valfun(){
+            const x=document.forms["f1"]["name"].value;
+            const y=document.forms["f1"]["mail"].value;
+            const z=document.forms["f1"]["password"].value;
+            const echeck = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
+            const pchecka=/[A-Z]/;
+            const pcheckn=/[0-9]/;
+            if(x===""){
+                alert("Name must not be empty");
+                document.getElementById("name").style.borderColor="red";
+                return false;
+            }
+            else{
+                document.getElementById("name").style.borderColor="green";
+            }
+            if(!echeck.test(y))
+            {
+                alert("email is not valid");
+                document.getElementById("mail").style.borderColor="red";
+                return false;
+            }
+            else{
+                document.getElementById("mail").style.borderColor="green";
+            }
+            if(!pchecka.test(z) || !pcheckn.test(z) || z.length<8 ){
+                alert("password is not valid");
+                document.getElementById("password").style.borderColor="red";
+                return false;
+            }
+            else{
+                document.getElementById("password").style.borderColor="green";
+            }
+            return true;
+        }
+    </script>
+</body>
+</html>

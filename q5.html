@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Word Counter</title>
+    <style>
+        textarea { width: 100%; height: 150px; font-size: 16px; }
+        .highlight { background-color: yellow; }
+    </style>
+</head>
+<body>
+
+    <h2>Word Counter</h2>
+    <textarea id="text"></textarea>
+    <p>Words: <span id="count">0</span></p>
+    <p>Repeated: <span id="repeat">None</span></p>
+    <div id="highlight"></div>
+
+    <script>
+        const textArea = document.getElementById("text"),
+              count = document.getElementById("count"),
+              repeat = document.getElementById("repeat"),
+              highlight = document.getElementById("highlight");
+
+        textArea.addEventListener("input", () => {
+            let words = textArea.value.match(/\b\w+\b/g) || [];
+            count.textContent = words.length;
+
+            let freq = {}, repeated = [];
+            words.forEach(w => freq[w.toLowerCase()] = (freq[w.toLowerCase()] || 0) + 1);
+            repeated = Object.keys(freq).filter(w => freq[w] > 1);
+
+            repeat.textContent = repeated.length ? repeated.join(", ") : "None";
+            highlight.innerHTML = textArea.value.replace(/\b\w+\b/g, w => 
+                repeated.includes(w.toLowerCase()) ? `<span class="highlight">${w}</span>` : w);
+        });
+    </script>
+
+</body>
+</html>

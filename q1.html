@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dynamic Table</title>
+</head>
+<body>
+
+    <input id="rows" type="number" placeholder="Rows">
+    <input id="cols" type="number" placeholder="Columns">
+    <button onclick="generateTable()">Generate Table</button>
+    
+    <div id="tableContainer"></div>
+
+    <script>
+        function generateTable() {
+            let rows = document.getElementById("rows").value;
+            let cols = document.getElementById("cols").value;
+            let table = document.createElement("table"), container = document.getElementById("tableContainer");
+            table.border = "1"; container.innerHTML = ""; 
+
+            for (let i = 0; i < rows; i++) {
+                let row = table.insertRow();
+                for (let j = 0; j < cols; j++) {
+                    let cell = row.insertCell();
+                    cell.textContent = `(${i+1},${j+1})`;
+                    cell.onclick = () => row.remove(); // Delete row on click
+                }
+            }
+            container.appendChild(table);
+        }
+    </script>
+
+</body>
+</html>
